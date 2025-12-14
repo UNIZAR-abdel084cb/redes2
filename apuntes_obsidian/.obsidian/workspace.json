@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "CSMA-CA.md",
+                "file": "ERLANG.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "CSMA-CA"
+              "title": "ERLANG"
             }
           }
         ]
@@ -172,15 +172,15 @@
   "active": "c9551110d0b8a90e",
   "lastOpenFiles": [
     "ETHERNET.md",
-    "ERLANG.md",
-    "DUPLEXIDAD.md",
-    "CSMA-CA.md",
-    "CODIFICACION-VOZ.md",
+    "ICMP.md",
+    "IP.md",
+    "WIFI.md",
     "ARP.md",
     "ATM.md",
-    "WIFI.md",
-    "IP.md",
-    "ICMP.md",
+    "CODIFICACION-VOZ.md",
+    "CSMA-CA.md",
+    "ERLANG.md",
+    "DUPLEXIDAD.md",
     "imagenes/tramas_fragmentadas_wifi.png",
     "imagenes/csma-ca-fragmentacion.png",
     "imagenes/formula-rts-cts-concreto.png",
