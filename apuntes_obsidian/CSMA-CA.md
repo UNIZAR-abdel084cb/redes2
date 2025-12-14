@@ -1,5 +1,5 @@
+![[csma-ca-no-cts.png]]
 ## 0. Idea general: CSMA/CA
-
 En WiFi todos comparten el mismo medio (el aire), así que:
 - Antes de enviar, cada estación **escucha el canal**.
 - Si está libre, **no envía inmediatamente**, sino que respeta unos tiempos y una espera aleatoria para evitar choques.
@@ -7,7 +7,6 @@ En WiFi todos comparten el mismo medio (el aire), así que:
 Ahí aparecen:
 > **DIFS, SIFS, slot, backoff, ACK, etc.**
 ## 1. SIFS (Short InterFrame Space)
-
 - Es el **tiempo más corto** entre tramas: unos pocos microsegundos.
 - Lo usa el receptor para cosas “críticas”:
     - DATA → **SIFS** → ACK
@@ -16,7 +15,6 @@ Ahí aparecen:
 - Como es el intervalo **más corto**, estas respuestas tienen **prioridad** sobre cualquier otro que quiera empezar una nueva transmisión.
 
 CTS = **Clear To Send** (“listo para enviar”).
-
 Es una **trama de control de WiFi** que solo aparece cuando se usa el mecanismo **RTS/CTS**:
 1. La estación que quiere enviar datos manda una trama **RTS** (_Request To Send_) al AP o al receptor.
 2. Si el receptor ve que el canal está libre y puede recibir, responde con **CTS** después de un **SIFS**.
@@ -25,8 +23,6 @@ Es una **trama de control de WiFi** que solo aparece cuando se usa el mecanismo 
 Sirve para:
 - Evitar colisiones en situaciones jodidas (nodos ocultos).
 - Avisar al resto de estaciones de cuánto tiempo va a durar la transmisión (nav duration).
-
-
 - DATA → **SIFS** → ACK.
 ## 2. DIFS (Distributed InterFrame Space)
 - Es un intervalo **más largo que SIFS**.
@@ -68,8 +64,6 @@ Ese ACK tiene:
 
 Se suma entero al tiempo total de la transmisión de esa trama de datos.
 
-
----
 ### 1. El medio se queda libre y empieza el proceso
 
 Imagina que ha terminado una transmisión en WiFi y el aire queda “callado”.  
@@ -79,8 +73,6 @@ Cuando el medio se queda libre, **nadie puede hablar inmediatamente**.
 Primero, cada estación que quiere transmitir debe esperar un tiempo fijo llamado **DIFS (Distributed InterFrame Space)**.
 
 > DIFS = “si el canal lleva este ratito libre, puedo empezar a competir por él”.
-
----
 
 ### 2. Espera aleatoria: el backoff
 Después de DIFS, las estaciones **no envían aún**, porque si varias quisieran hablar a la vez, chocarían.
@@ -93,8 +85,6 @@ Durante el backoff:
 - Cuando el canal vuelve a quedar libre y pasa DIFS, la estación reanuda donde se quedó.
 
 Cuando una estación llega a **backoff = 0**, le toca el turno: es **su momento de transmitir**.
-
----
 ### 3. Primera fase: RTS (Request To Send)
 En el mecanismo RTS/CTS, la estación **no envía todavía los datos grandes**.  
 Primero manda una trama cortita llamada **RTS (Request To Send)**:
@@ -102,7 +92,6 @@ Primero manda una trama cortita llamada **RTS (Request To Send)**:
 
 Esta RTS va dirigida a un receptor concreto (por ejemplo, el AP).
 
----
 ### 4. Respuesta rápida: SIFS y CTS (Clear To Send)
 
 El receptor escucha la RTS.  
@@ -121,10 +110,7 @@ Cuando el CTS se emite, **todas las demás estaciones lo oyen** y ven el campo D
 Ese campo les dice: “el canal estará ocupado durante X microsegundos, no intentéis transmitir”.  
 Entonces esas estaciones ajustan su **Network Allocation Vector (NAV)** y permanecen calladas ese tiempo.
 
----
-
 ### 5. Envío de los datos: DATA
-
 El emisor recibe el CTS.  
 Ahora sabe que tiene el permiso y que el resto de estaciones se callarán.
 
@@ -133,9 +119,6 @@ El emisor:
 2. Después del SIFS, envía su trama **DATA** (los datos de usuario, con cabeceras MAC, IP, TCP/UDP, etc.).
 
 Durante todo este tiempo, las demás estaciones respetan el silencio porque el CTS les ha indicado que el medio está reservado.
-
----
-
 ### 6. Confirmación final: SIFS y ACK
 
 El receptor recibe la trama DATA:
@@ -152,8 +135,6 @@ De nuevo, al usar SIFS, el ACK tiene prioridad sobre cualquier estación que est
 Si el emisor **recibe el ACK**, sabe que la transmisión ha ido bien y termina el proceso.  
 Si **no recibe el ACK**, asume que hubo un problema (colisión o error) y más tarde reintentará la transmisión, incrementando la ventana de backoff.
 
----
-
 ### 7. Resumen en palabras
 
 El ciclo completo con RTS/CTS es:
@@ -168,3 +149,56 @@ Y todo esto encaja con la idea de:
 - SIFS → **respuestas prioritarias** (CTS, luego DATA, luego ACK).
 - RTS/CTS → mecanismo para **reservar el canal** y avisar a todos.
 - ACK → mecanismo para **confirmar que la trama de datos ha llegado bien**.
+
+
+Toma un número medio de slots de backoff como
+
+15−72=4 slots\frac{15-7}{2} = 4 \text{ slots} 215−7​=4 slots
+
+(aquí está usando una aproximación que les han dado en clase: “la mitad del rango”).
+
+Buena duda, porque la frase de la diapositiva lía un poco.
+
+**Respuesta corta:**  
+👉 Cualquier estación que **escuche** un RTS o un CTS **retrasa sus transmisiones**, **da igual a quién pensara enviar**. No es solo si iba al mismo destinatario.
+
+### Cómo funciona en realidad
+1. El emisor manda **RTS** al receptor.  
+    En el RTS va un campo **Duration**: cuánto tiempo va a estar ocupado el medio (RTS + CTS + DATA + ACK).
+    
+2. **Todas las estaciones que escuchan el RTS**:
+    - No importa a quién fueran a hablar.
+    - Ven el campo Duration y ajustan su **NAV (Network Allocation Vector)**.
+    - NAV > 0 ⇒ “el medio está reservado, me callo ese tiempo”.
+        
+3. El receptor responde con **CTS**.
+    - También lleva un campo Duration (tiempo restante de reserva).
+4. **Todas las estaciones que escuchan el CTS** hacen lo mismo:
+    - Actualizan su NAV y **se callan** hasta que pase ese tiempo.
+
+En resumen:
+- Si una estación oye **RTS o CTS**, entiende:  
+    “Alguien va a usar el medio durante X microsegundos, yo no transmito”.
+    
+- No se mira “si es mi mismo destino o no”; se callan **todas las que lo escuchan**, porque el objetivo es evitar interferencias (terminal oculto/expuesto).
+![[csma-ca-cts.png]]
+
+
+Sin RTS/CTS
+![[formula-backoff-tiempo-no-cts.png]]
+
+Con RTS/CTS
+![[formula-con-cts.png]]
+![[formula-rts-cts-concreto.png]]
+
+# Fragmentación
+![[csma-ca-fragmentacion.png]]
+Monopoliza la transferencia y solo repite los SIFS tras tener la aprobación mediante el CTS.
+
+![[tramas_fragmentadas_wifi.png]]
+
+En vez de una trama grande:
+> 30 B + 2310 B + 4 B
+
+tienes tres tramas:
+> 3 × ( 30 B + 770 B + 4 B )

@@ -1,113 +1,51 @@
-Buenísima pregunta, aquí hay mucha “chicha” de Ethernet 👇
+![[trama_ethernet.png]]
 
----
+## 1. Estructura general de una trama Ethernet
+Lo que va “por el cable” es:
+- **Preamble (8 bytes)**
+    - 7 bytes de sincronización (10101010…)
+    - 1 byte SFD (Start of Frame Delimiter, 10101011)
+    - Sirve solo para que el receptor se sincronice.
+    - A veces no se cuenta dentro del tamaño de trama “lógica”.
 
-## 1. De dónde salen esos 26 bytes “ETH”
+Luego viene la **trama MAC**:
+1. **Destination address** – 6 B
+2. **Source address** – 6 B
+3. **Type/Length** – 2 B
+    - En Ethernet II (a) se interpreta como **Type** (p.ej. 0x0800 = IPv4).
+    - En IEEE 802.3 (b) se interpreta como **Length** (nº de bytes de datos) y encima va LLC/SNAP para indicar el tipo de protocolo.
+4. **Data** – entre 0 y 1500 B
+5. **Pad (relleno)** – entre 0 y 46 B
+    - Si los datos son muy pocos, se añaden bytes de relleno para que la trama MAC (desde dest hasta FCS) tenga **al menos 64 B**.
+6. **Checksum (FCS)** – 4 B (CRC-32)
 
-Tu compi está sumando:
+Tamaño de la trama MAC (sin preámbulo ni IFG):
+- **mínimo 64 B**
+- **máximo 1518 B** (14 cabecera + 1500 datos + 4 FCS)
+## 2. ¿Por qué “todas las tramas deben durar más de 2τ”?
+- En CSMA/CD, para detectar una colisión, el emisor debe seguir transmitiendo **mientras la señal recorre el cable y vuelve** → eso es **2τ** (tiempo ida y vuelta).
+- Por eso se fija un **tamaño mínimo de trama** (64 B a 10 Mb/s ⇒ cierto tiempo mínimo en el medio).
+- Si la trama fuera más corta, podrías acabar de transmitir sin enterarte de que chocaste con otro.
 
-[  
-10M + 40 + 26  
-]
 
-donde:
+![[trama_ethernet_tag.png]]
 
-- **10M bytes** → datos de audio (10 B por muestra × M muestras)
-    
-- **40 bytes** → IP (20) + UDP (8) + RTP (12)
-    
-- **26 bytes** → todo lo que añade **Ethernet** antes de meterlo al cable
-    
+La imagen muestra una **trama Ethernet etiquetada (802.1Q)**, que es como una trama Ethernet “normal”, pero con un **tag VLAN** añadido para dos cosas:
+1. **Identificar la VLAN** (VLAN ID)
+2. **Marcar prioridad/QoS** (los 3 bits de prioridad, “Prio”, también llamado **PCP / 802.1p**)
 
-Esos **26 bytes** los podemos desglosar así:
+### ¿Qué cambia en la trama?
+En Ethernet sin VLAN, después de **MAC destino (6B)** y **MAC fuente (6B)** viene directamente el **EtherType/Longitud (2B)**.
+Con **802.1Q**, se insertan **4 bytes** justo después de la MAC fuente:
+- **TPID (2 bytes)** = `0x8100` (esto “dice” que hay tag 802.1Q)
+- **TCI (2 bytes)**, que contiene:
+    - **PCP / Prioridad: 3 bits** → valores **0 a 7** (por eso “hasta 8 colas”)
+    - **DEI/CFI: 1 bit** (en muchos esquemas se omite o no se resalta)
+    - **VLAN ID: 12 bits** → valores **1 a 4094** (0 y 4095 son reservados)
 
-### a) Cabecera Ethernet (14 B)
+Luego de esos 4 bytes aparece el **EtherType original (2 bytes)** (IPv4 0x0800, ARP 0x0806, etc.), y después **Datos + PAD** y el **CRC/FCS**.
 
-La cabecera clásica de Ethernet son **14 bytes**:
-
-1. **6 B – MAC destino**  
-    A qué tarjeta de red va dirigida la trama (siguiente salto, no el destino final IP).
-    
-2. **6 B – MAC origen**  
-    Qué tarjeta de red la envía.
-    
-3. **2 B – EtherType/Longitud**  
-    Indica qué protocolo va dentro (por ejemplo, 0x0800 = IPv4).
-    
-
-👉 Estos 14 bytes se consideran “cabecera Ethernet”.
-
-### b) FCS / CRC (4 B)
-
-Al final de la trama Ethernet hay un **Frame Check Sequence** de **4 bytes**:
-
-- Es un **CRC-32**, sirve para detectar errores en la trama.
-    
-- Si el receptor calcula un CRC distinto, descarta la trama.
-    
-
-Hasta aquí llevamos:
-
-[  
-14\ \text{(cabecera)} + 4\ \text{(FCS)} = 18\ \text{bytes}  
-]
-
-Eso es lo que mucha gente llama “cabecera + cola Ethernet”.
-
-### c) Preambulo + SFD (8 B)
-
-Antes de la cabecera Ethernet, por el cable se envía:
-
-- **7 bytes de preámbulo**: patrón 10101010…  
-    → sirve para que el receptor sincronice el reloj y “enganche” la señal.
-    
-- **1 byte de SFD (Start Frame Delimiter)**: 10101011  
-    → marca el **inicio real** de la trama (justo después viene la MAC destino).
-    
-
-Total: **7 + 1 = 8 bytes**.
-
-Estos 8 bytes **no cuentan como tamaño de trama** cuando se habla de MTU, pero **sí ocupan tiempo en el enlace**, por eso tu compi los suma como overhead.
-
-Entonces:
-
-[  
-18\ \text{(cabecera+FCS)} + 8\ \text{(preambulo+SFD)} = 26\ \text{bytes}  
-]
-
----
-
-## 2. ¿Qué es el IFG y por qué son 96 bits?
-
-Después de cada trama Ethernet, el estándar obliga a dejar un tiempo mínimo de silencio:
-
-- **IFG – Inter Frame Gap**: 12 bytes de “hueco”, es decir, **96 bits** de línea en reposo.
-    
-
-Sirve para:
-
-- Dar tiempo a las tarjetas de red a **procesar la trama** recibida.
-    
-- En los medios compartidos clásicos (Ethernet antiguo CSMA/CD), ayudaba a evitar colisiones y daba “fairness” entre nodos.
-    
-- Aun en full-duplex, el estándar lo mantiene.
-    
-
-Tu compi lo añade **aparte**:
-
-[  
-L_{\text{trama}} = (10M + 40 + 26)\cdot 8 + 96  
-]
-
-- ((10M + 40 + 26)\cdot 8) → todos los **bytes** que se mandan efectivamente (datos + IP/UDP/RTP + cabecera/FCS/preambulo/SFD) pasados a bits.
-    
-- **+ 96** → los bits del IFG, que también consumen tiempo en el enlace aunque no sean “datos”.
-    
-
-Al multiplicar y agrupar:
-
-[  
-(10M + 66)\cdot 8 + 96 = 80M + 528 + 96 = 80M + 624\ \text{bits}  
-]
-
-Ese es el **tamaño efectivo en bits** que ocupa **una trama de audio completa en el cable**, contando todo el overhead de Ethernet (incluido el hueco entre tramas). Con eso luego calcula el tiempo de transmisión en el enlace de 10 Mbps.
+## IFG
+El **IFG (Inter Frame Gap)** es, literalmente, **el silencio obligatorio entre dos tramas Ethernet**.
+- Cuando una trama termina, **no puedes empezar otra inmediatamente**.
+- El estándar obliga a dejar un hueco de 96 bits de tiempo** en el medio.
