@@ -4,24 +4,53 @@
     "type": "split",
     "children": [
       {
-        "id": "d52e4c006c70ac0a",
+        "id": "9aa0cfdde87342db",
         "type": "tabs",
         "children": [
           {
-            "id": "c9551110d0b8a90e",
+            "id": "f99a7420102a7aef",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ERLANG.md",
+                "file": "EXAMENES/Examen 2023-2024.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ERLANG"
+              "title": "Examen 2023-2024"
+            }
+          },
+          {
+            "id": "ec9fbbef183050b8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ETHERNET.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "ETHERNET"
+            }
+          },
+          {
+            "id": "b1cc2821b7d763da",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Ocupación.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Ocupación"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -169,17 +198,28 @@
       "bases:Create new base": false
     }
   },
-  "active": "c9551110d0b8a90e",
+  "active": "b1cc2821b7d763da",
   "lastOpenFiles": [
+    "Capacidad.md",
+    "Ocupación.md",
     "ETHERNET.md",
-    "ICMP.md",
+    "TCP.md",
+    "EXAMENES/Examen 2023-2024.md",
+    "imagenes/tabla_conversion.png",
+    "EXAMENES",
+    "VoIP-ToIP.md",
     "IP.md",
-    "WIFI.md",
-    "ARP.md",
-    "ATM.md",
+    "UDP.md",
+    "RTP.md",
     "CODIFICACION-VOZ.md",
-    "CSMA-CA.md",
+    "imagenes/trama_wifi_sin_QoS.png",
+    "WIFI.md",
+    "LLC.md",
+    "ATM.md",
     "ERLANG.md",
+    "ICMP.md",
+    "ARP.md",
+    "CSMA-CA.md",
     "DUPLEXIDAD.md",
     "imagenes/tramas_fragmentadas_wifi.png",
     "imagenes/csma-ca-fragmentacion.png",
@@ -189,8 +229,6 @@
     "imagenes/csma-ca-cts.png",
     "imagenes/csma-ca-no-cts.png",
     "imagenes/mas_tramas_mac.png",
-    "imagenes/trama_wifi_mac.png",
-    "imagenes/trama_wifi.png",
     "BASURERO/ERLANG.md",
     "BASURERO/ETHERNET.md",
     "BASURERO/TEMA-5.md",
@@ -199,11 +237,8 @@
     "BASURERO/EXAMEN-2025.md",
     "BASURERO/MAC.md",
     "BASURERO/PHY.md",
-    "BASURERO/USO-ENLACE.md",
-    "DHCP.md",
     "Untitled.base",
     "imagenes",
-    "BASURERO",
-    "IMAGENES.md"
+    "BASURERO"
   ]
 }

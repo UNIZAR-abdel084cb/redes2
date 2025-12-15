@@ -38,6 +38,10 @@ Luego la **trama MAC** va a la tasa indicada (2, 5,5 u 11 Mbps en 802.11b).
 
 ![[trama_wifi_mac.png]]
 
+Hay otra diapositiva que no muestra el QoS, asi que la MAC header quedaria como 30B + 4B de CRC:
+![[trama_wifi_sin_QoS.png]]
+
+
 Te lo traduzco a “qué tengo que sumar en los ejercicios” y qué significa cada cosa.
 #### Frame Body (DATA)
 
