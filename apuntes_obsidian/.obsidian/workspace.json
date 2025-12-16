@@ -4,39 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "9aa0cfdde87342db",
+        "id": "d02eac3d097e8cb2",
         "type": "tabs",
         "children": [
           {
-            "id": "f99a7420102a7aef",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "EXAMENES/Examen 2023-2024.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Examen 2023-2024"
-            }
-          },
-          {
-            "id": "ec9fbbef183050b8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ETHERNET.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "ETHERNET"
-            }
-          },
-          {
-            "id": "b1cc2821b7d763da",
+            "id": "f350dfd8eb0a4bb2",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -48,9 +20,23 @@
               "icon": "lucide-file",
               "title": "Ocupación"
             }
+          },
+          {
+            "id": "2eb522de6c4b272a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Subredes.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Subredes"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -198,13 +184,22 @@
       "bases:Create new base": false
     }
   },
-  "active": "b1cc2821b7d763da",
+  "active": "2eb522de6c4b272a",
   "lastOpenFiles": [
-    "Capacidad.md",
-    "Ocupación.md",
     "ETHERNET.md",
-    "TCP.md",
+    "imagenes/Paradayespera.JPG",
+    "ERLANG.md",
+    "DUPLEXIDAD.md",
+    "DUDAS.md",
+    "Ocupación.md",
+    "WIFI.md",
+    "CSMA-CA.md",
+    "Subredes.md",
     "EXAMENES/Examen 2023-2024.md",
+    "ATM.md",
+    "Notas.md",
+    "Capacidad.md",
+    "TCP.md",
     "imagenes/tabla_conversion.png",
     "EXAMENES",
     "VoIP-ToIP.md",
@@ -213,14 +208,9 @@
     "RTP.md",
     "CODIFICACION-VOZ.md",
     "imagenes/trama_wifi_sin_QoS.png",
-    "WIFI.md",
     "LLC.md",
-    "ATM.md",
-    "ERLANG.md",
     "ICMP.md",
     "ARP.md",
-    "CSMA-CA.md",
-    "DUPLEXIDAD.md",
     "imagenes/tramas_fragmentadas_wifi.png",
     "imagenes/csma-ca-fragmentacion.png",
     "imagenes/formula-rts-cts-concreto.png",
@@ -228,15 +218,10 @@
     "imagenes/formula-backoff-tiempo-no-cts.png",
     "imagenes/csma-ca-cts.png",
     "imagenes/csma-ca-no-cts.png",
-    "imagenes/mas_tramas_mac.png",
     "BASURERO/ERLANG.md",
     "BASURERO/ETHERNET.md",
     "BASURERO/TEMA-5.md",
     "BASURERO/TEMA-1.md",
-    "BASURERO/TEMA-3.md",
-    "BASURERO/EXAMEN-2025.md",
-    "BASURERO/MAC.md",
-    "BASURERO/PHY.md",
     "Untitled.base",
     "imagenes",
     "BASURERO"

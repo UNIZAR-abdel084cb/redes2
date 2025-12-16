@@ -1,3 +1,4 @@
+En las formulas se tiene en cuenta los usuarios posibles y en la tabla los canales
 ## 0. ¿Para qué usamos Erlang?
 
 Se usa para **dimensionar sistemas de voz/datos** donde hay:
@@ -34,7 +35,8 @@ Se usa para **dimensionar sistemas de voz/datos** donde hay:
     - Ej.: si una llamada dura de media 3 minutos, T = 3 min.
 - **N**
     - Es el número de **usuarios/fuentes** que pueden generar llamadas.
-    - Ej.: una empresa con 200 empleados que pueden llamar ⇒ N = 200.
+    - Ej.: una empresa co
+    - n 200 empleados que pueden llamar ⇒ N = 200.
         
 - **a**
     - Es el **tráfico medio por usuario**, en Erlangs.
@@ -133,3 +135,53 @@ Situación:
 - Métrica principal: **probabilidad de pérdida**.
 - Modelo exacto si se tienen todos los parámetros (no suele aparecer en ejercicios simples).
 - muchas veces se **aproxima** con Erlang C sabiendo que hay un error (cola infinita).
+
+## Qué mide Erlang
+
+- Erlang (A) mide **ocupación media** de un recurso durante un intervalo (aquí: la hora cargada).
+- 1 Erlang significa: “en promedio, el recurso está ocupado toda la hora”.
+- Ejemplo mental:
+    - 0,5 Erlang = ocupado la mitad de la hora (de media).
+    - 0,004 Erlang = ocupado un 0,4% de la hora (de media).
+        
+
+## Tiempo activo de un sensor si ofrece 0,004 Erlang
+- Si 1 Erlang = 3600 s de ocupación media en una hora,
+- entonces 0,004 Erlang = 0,004 * 3600 s = 14,4 s.
+
+✅ Respuesta: un sensor está activo, de media, **14,4 segundos** en la hora cargada.
+
+
+# “Número máximo de sensores presentes” qué significa
+- “Sensores presentes” = **cuántos sensores existen en el sistema** (instalados/registrados).
+- No significa “cuántos están transmitiendo a la vez”.
+
+Diferencia clave:
+- Presentes: población total (los que podrían transmitir).
+- Activos: los que transmiten en ese instante. (canales generalmente)
+
+# Diferencia entre N_canales y N_usuarios
+
+## N_canales
+- Es la **capacidad simultánea**:
+    - cuántos sensores pueden transmitir “a la vez” sin degradación.
+- Si llega otro cuando ya está lleno, **se bloquea** (se pierde).
+    
+
+## N_usuarios (o sensores presentes)
+
+- Es la **población total** que puede intentar transmitir.
+- De esa población, solo una parte estará activa en cada momento.
+- N_canales = “huecos simultáneos”
+- N_usuarios = “cantidad de sensores existentes”
+
+# Cómo se calcula el máximo de sensores presentes para pérdida < 3%
+
+1. Tráfico total ofrecido en la hora cargada:
+- A_total = N_presentes * 0,004 Erlang
+1. Probabilidad de pérdida (bloqueo):
+- Se usa Erlang B porque “si está lleno, se pierde” (no espera).
+2. Condición que piden:
+
+- Encontrar el máximo N_presentes tal que:
+    - ErlangB(A_total, N_canales) < 0,03

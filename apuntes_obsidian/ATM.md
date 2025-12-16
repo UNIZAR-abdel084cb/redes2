@@ -1,3 +1,4 @@
+Número de celdas = C = floor((L+8)/48)
 ## 1. ¿qué es ATM y  AAL5?
 - **ATM (Asynchronous Transfer Mode)**:
     - Tecnología de conmutación de celdas.
