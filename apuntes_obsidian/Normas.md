@@ -1,0 +1,1 @@
+Lo de las normas pregúntalo y ya, por ejemplo en wifi  tamaño de la cabecera MAC y velocidades de preambulo, cabeceras y ACK. En la teoría no salen muchas normas que salen en exámenes viejos.

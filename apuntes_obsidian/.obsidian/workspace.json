@@ -4,35 +4,33 @@
     "type": "split",
     "children": [
       {
-        "id": "d02eac3d097e8cb2",
+        "id": "18293d33c2f4c01c",
         "type": "tabs",
         "children": [
           {
-            "id": "f350dfd8eb0a4bb2",
+            "id": "63a9de41f4be2346",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "image",
               "state": {
-                "file": "Ocupación.md",
-                "mode": "source",
-                "source": false
+                "file": "imagenes/Pasted image 20251218180915.png"
               },
-              "icon": "lucide-file",
-              "title": "Ocupación"
+              "icon": "lucide-image",
+              "title": "Pasted image 20251218180915"
             }
           },
           {
-            "id": "2eb522de6c4b272a",
+            "id": "d252f71d3c0cd2f3",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Subredes.md",
+                "file": "EXAMENES/Examen 2022-23-GRE.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Subredes"
+              "title": "Examen 2022-23-GRE"
             }
           }
         ],
@@ -184,22 +182,36 @@
       "bases:Create new base": false
     }
   },
-  "active": "2eb522de6c4b272a",
+  "active": "d252f71d3c0cd2f3",
   "lastOpenFiles": [
-    "ETHERNET.md",
-    "imagenes/Paradayespera.JPG",
+    "imagenes/Pasted image 20251218180923.png",
+    "imagenes/Pasted image 20251218180915.png",
+    "EXAMENES/Examen 2022-23-GRE.md",
+    "TCP.md",
+    "MAC.md",
     "ERLANG.md",
+    "imagenes/tunelGRE_emiliano.png",
+    "OvS.md",
+    "Normas.md",
+    "LLC.md",
+    "CSMA-CA.md",
+    "WIFI.md",
+    "Ocupación.md",
+    "FRAGMENTACION.md",
+    "IPV6.md",
+    "imagenes/fragmentacion.png",
+    "imagenes/ejercicio3_emiliano.png",
+    "ETHERNET.md",
+    "imagenes/tabla-de-prefijos.jpg",
+    "imagenes/tunelGRE-emiliano.png",
+    "imagenes/tunelGRE2022-23-segunda.png",
+    "EXAMENES/Examen 2023-2024.md",
+    "Subredes.md",
+    "imagenes/Paradayespera.JPG",
     "DUPLEXIDAD.md",
     "DUDAS.md",
-    "Ocupación.md",
-    "WIFI.md",
-    "CSMA-CA.md",
-    "Subredes.md",
-    "EXAMENES/Examen 2023-2024.md",
     "ATM.md",
-    "Notas.md",
     "Capacidad.md",
-    "TCP.md",
     "imagenes/tabla_conversion.png",
     "EXAMENES",
     "VoIP-ToIP.md",
@@ -207,21 +219,7 @@
     "UDP.md",
     "RTP.md",
     "CODIFICACION-VOZ.md",
-    "imagenes/trama_wifi_sin_QoS.png",
-    "LLC.md",
     "ICMP.md",
-    "ARP.md",
-    "imagenes/tramas_fragmentadas_wifi.png",
-    "imagenes/csma-ca-fragmentacion.png",
-    "imagenes/formula-rts-cts-concreto.png",
-    "imagenes/formula-con-cts.png",
-    "imagenes/formula-backoff-tiempo-no-cts.png",
-    "imagenes/csma-ca-cts.png",
-    "imagenes/csma-ca-no-cts.png",
-    "BASURERO/ERLANG.md",
-    "BASURERO/ETHERNET.md",
-    "BASURERO/TEMA-5.md",
-    "BASURERO/TEMA-1.md",
     "Untitled.base",
     "imagenes",
     "BASURERO"

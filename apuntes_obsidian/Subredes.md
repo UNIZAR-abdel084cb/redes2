@@ -182,9 +182,9 @@ Asumimos el máximo de los casos posibels N = 1573
 
 log2(1577) = 10,6
 
-11 bits de host como mínimo -> /24
+11 bits de host como mínimo -> /21
 
-10.k.0.0/24
+10.k.0.0/21
 
 k = 0..79
 ## 2
