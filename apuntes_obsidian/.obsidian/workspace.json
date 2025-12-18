@@ -4,37 +4,20 @@
     "type": "split",
     "children": [
       {
-        "id": "18293d33c2f4c01c",
+        "id": "54e8f310909c3354",
         "type": "tabs",
         "children": [
           {
-            "id": "63a9de41f4be2346",
+            "id": "d8fd94775fde02df",
             "type": "leaf",
             "state": {
-              "type": "image",
-              "state": {
-                "file": "imagenes/Pasted image 20251218180915.png"
-              },
-              "icon": "lucide-image",
-              "title": "Pasted image 20251218180915"
-            }
-          },
-          {
-            "id": "d252f71d3c0cd2f3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "EXAMENES/Examen 2022-23-GRE.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Examen 2022-23-GRE"
+              "title": "New tab"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -182,12 +165,20 @@
       "bases:Create new base": false
     }
   },
-  "active": "d252f71d3c0cd2f3",
+  "active": "d8fd94775fde02df",
   "lastOpenFiles": [
+    "NAT.md",
+    "TCP.md",
+    "Pasted image 20251218205027.png",
+    "Pasted image 20251218205016.png",
+    "imagenes/Pasted image 20251218203831.png",
+    "UDP.md",
+    "imagenes/Pasted image 20251218202715.png",
+    "imagenes/Pasted image 20251218202726.png",
+    "ETHERNET.md",
+    "EXAMENES/Examen 2022-23-GRE.md",
     "imagenes/Pasted image 20251218180923.png",
     "imagenes/Pasted image 20251218180915.png",
-    "EXAMENES/Examen 2022-23-GRE.md",
-    "TCP.md",
     "MAC.md",
     "ERLANG.md",
     "imagenes/tunelGRE_emiliano.png",
@@ -201,22 +192,15 @@
     "IPV6.md",
     "imagenes/fragmentacion.png",
     "imagenes/ejercicio3_emiliano.png",
-    "ETHERNET.md",
-    "imagenes/tabla-de-prefijos.jpg",
-    "imagenes/tunelGRE-emiliano.png",
-    "imagenes/tunelGRE2022-23-segunda.png",
     "EXAMENES/Examen 2023-2024.md",
     "Subredes.md",
-    "imagenes/Paradayespera.JPG",
     "DUPLEXIDAD.md",
     "DUDAS.md",
     "ATM.md",
     "Capacidad.md",
-    "imagenes/tabla_conversion.png",
     "EXAMENES",
     "VoIP-ToIP.md",
     "IP.md",
-    "UDP.md",
     "RTP.md",
     "CODIFICACION-VOZ.md",
     "ICMP.md",

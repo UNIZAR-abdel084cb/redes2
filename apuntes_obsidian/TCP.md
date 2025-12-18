@@ -7,3 +7,10 @@
 * Tener en cuenta el envío mínimo en Ethernet
 	* minimo de payload de 46B
 * En wifi se trata como otro tdata pero sin tiempo de backoff
+
+![[Pasted image 20251218202715.png]]
+![[Pasted image 20251218203831.png]]
+
+# Hector
+![[Pasted image 20251218205016.png]]
+![[Pasted image 20251218205027.png]]
